@@ -1,0 +1,9 @@
+(compile transit-module.scm -O3 -d1 -J -s -o transit.so)
+(compile transit.import.scm -O3 -d0 -J -s -o transit.import.so)
+(compile chicken-transit.scm -O3 -d0)
+
+(install-extension
+ 'transit
+ '("transit.so" "transit.import.so"))
+
+(install-program 'chicken-transit "chicken-transit")

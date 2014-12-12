@@ -1,0 +1,8 @@
+;;; tabexpand.meta -*- Scheme -*-
+
+((synopsis "An implementation of the Transit protocol")
+ (category parsing)
+ (license "BSD")
+ (doc-from-wiki)
+ (needs matchable miscmacros medea base64 defstruct)
+ (author "felix winkelmann"))
