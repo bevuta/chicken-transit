@@ -116,7 +116,9 @@
 	    ((lookup-handler data) =>
 	     (lambda (wh)
 	       (let* ((tag ((write-handler-tag wh) data))
-		      (rep ((if key? (write-handler-string-rep wh) (write-handler-rep wh)) data)))
+		      (rep ((if key?
+				(write-handler-string-rep wh)
+				(write-handler-rep wh)) data)))
 		 (if key?
 		     rep
 		     (let ((t (string->symbol (string-append "~#" tag))))
