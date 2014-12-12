@@ -81,7 +81,17 @@ Returns the value of a tagged-value record.
 Creates a write-handler that can be added to {{current-transit-write-handlers}}.
 
 
-=== Authors
+=== Command line access
+
+This extension installs a command-line tool named {{chicken-transit}}
+for encoding or decoding data in Transit format. It acts as simple
+UNIX filter, converting stdin (or the content of files given as
+arguments) to stdout. Normally the direction of the conversion is
+detected automatically, alternatively pass {{-e}} to encode or {{-d}}
+to decode. {{-v}} will generate "verbose" JSON when encoding.
+
+
+=== Author
 
 Felix Winkelmann
 
