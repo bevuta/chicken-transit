@@ -15,8 +15,8 @@
 (define (read-transit #!optional (port (current-input-port)))
   (transit-decode (nth-value 0 (read-json port))))
 
-(define (write-transit data #!optional (port (current-output-port)))
-  (write-json (transit-encode data) port))
+(define (write-transit data #!optional verbose (port (current-output-port)))
+  (write-json (transit-encode data verbose: verbose) port))
 
 
 ;; encoding of data to transit
