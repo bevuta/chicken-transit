@@ -21,11 +21,12 @@
       (tagged-value-value x)))
 
   (define (usage code)
-    (print "usage: chicken-transit [-h] [-d] [-e] [FILENAME ...]")
+    (print "usage: chicken-transit [-h] [-d] [-e] [-v] [FILENAME ...]")
     (exit code))
 
   (define (main args)
     (let ((mode #f)
+	  (verbose #f)
 	  (files '()))
       (define (encode/decode files)
 	(for-each
@@ -47,13 +48,16 @@
 	(let loop ()
 	  (let ((x (read port)))
 	    (unless (eof-object? x)
-	      (write-transit x)
+	      (write-transit x verbose)
 	      (loop)))))
       (let loop ((args args))
 	(match args
 	  (() (encode/decode (reverse files)))
 	  (((or "-h" "-help" "--help") . _)
 	   (usage 0))
+	  (("-v" . more)
+	   (set! verbose #t)
+	   (loop more))
 	  (("-d" . more)
 	   (set! mode 'decode)
 	   (loop more))
