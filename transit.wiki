@@ -1,0 +1,102 @@
+[[tags:eggs]]
+[[toc:]]
+
+== transit
+
+=== Introduction
+
+An implementation of the
+[[https://github.com/cognitect/transit-format|Transit]] data-format
+for CHICKEN. This extension uses
+[[http://wiki.call-cc.org/eggref/4/medea|medea]] for parsing and
+generating the raw JSON.
+
+=== Procedures
+
+<procedure>(read-transit [PORT])</procedure>
+
+Reads data in transit format from PORT, which defaults to the
+current input port.
+
+<procedure>(write-transit DATA [VERBOSE PORT])</procedure>
+
+Writes the s-expression DATA in transit form to PORT, which defaults
+to the current output port. If VERBOSE is given and true, then the
+output will be in "verbose" mode, omitting special map handling and
+cached values.
+
+<procedure>(transit-encode DATA #!key toplevel verbose write-handlers)</procedure>
+
+Encodes the s-expression DATA into another expression that can be
+transformed as valid JSON via {{write-json}}. This procedure is called
+by {{write-transit}} before emitting the JSON text. The keyword
+argument {{toplevel}} specifies whether the data is assumed to be a
+toplevel expression and defaults to true. If {{verbose}} is given and
+true, output will be in "verbose" JSON format. {{write-handlers}}
+defaults to the current value of {{current-transit-read-handlers}}.
+
+<procedure>(transit-decode DATA [READ-HANDLERS])</procedure>
+
+Decodes the s-expression DATA, probably read via {{read-json}}, into
+another expression containing data of extended types, normally not
+handled in JSON. The optional argument READ-HANDLERS defaults to the
+current value of {{current-transit-read-handlers}}.
+
+<parameter>(current-transit-write-handlers [LIST])</parameter>
+
+Holds an a-list mapping type-predicates (procedures of one argument of
+an arbitrary type returning a boolean value) to a "write-handler"
+record, which can be constructed with {{make-write-handler}}.
+
+<parameter>(current-transit-read-handlers [LIST])</parameter>
+
+Holds an a-list mapping a tag name (a symbol or character) to a
+procedure that receives a string or an s-expression parsed from JSON
+and returns another data-object, presumably of the correct type for
+the given tag.
+
+Note that this implementation does not handle transit data of the
+types {{f}} (arbitrary precision decimal), {{n}} (arbitrary precision
+integer), {{m}} + {{t}} (points in time), {{u}} (UUID) and {{r}}
+(URI), even though CHICKEN provides extensions to handle these types
+of data. To have support for these types, add appropriate
+read-handlers.
+
+<procedure>(tagged-value? X)</procedure>
+
+Returns true, if X is a tagged value record, or false otherwise.
+Tagged value records are returned for data-types for which no special
+handling is defined.
+
+<procedure>(tagged-value-tag TAGGEDVAL)</procedure>
+
+Returns the tag of a tagged-value record.
+
+<procedure>(tagged-value-value TAGGEDVAL)</procedure>
+
+Returns the value of a tagged-value record.
+
+<procedure>(make-write-handler #!key tag rep string-rep verbose-handler)</procedure>
+
+Creates a write-handler that can be added to {{current-transit-write-handlers}}.
+
+
+=== Authors
+
+Neil W. van Dyke
+
+=== License
+
+ (c)2004 Neil W. Van Dyke.  This program is Free
+ Software; you can redistribute it and/or modify it under the terms of the
+ GNU Lesser General Public License as published by the Free Software
+ Foundation; either version 2.1 of the License, or (at your option) any
+ later version.  This program is distributed in the hope that it will be
+ useful, but without any warranty; without even the implied warranty of
+ merchantability or fitness for a particular purpose.  See the GNU Lesser
+ General Public License [LGPL] for more details.
+
+=== Version History
+
+; 1.6 : fixed bug in setup script
+; 1.5 : initial release
