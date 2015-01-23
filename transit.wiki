@@ -97,7 +97,7 @@ Felix Winkelmann
 
 === License
 
- Copyright (c) 2007-2012, bevuta IT GmbH
+ Copyright (c) 2014-2015, bevuta IT GmbH
  
  All rights reserved.
  
