@@ -13,7 +13,10 @@
 ;; port-I/O
 
 (define (read-transit #!optional (port (current-input-port)))
-  (transit-decode (nth-value 0 (read-json port))))
+  (receive (result remainder)
+    (read-json port)
+    (values (and result (transit-decode result))
+            remainder)))
 
 (define (write-transit data #!optional verbose (port (current-output-port)))
   (write-json (transit-encode data verbose: verbose) port))
