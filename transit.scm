@@ -168,11 +168,11 @@
 
 ;; fallback record for unknown tagged values
 
-(define-record-type <tagged-value>
+(define-record-type tagged-value
   (make-tagged-value tag value)
   tagged-value?
   (tag tagged-value-tag)
-  (value tagged-value-value))
+  (value tagged-value-ref))
 
 
 ;; decoding of transit to data

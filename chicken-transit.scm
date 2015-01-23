@@ -18,7 +18,7 @@
   (define-record-printer (tagged-value x port)
     (fprintf port "#<tagged-value ~s : ~s>" 
       (tagged-value-tag x)
-      (tagged-value-value x)))
+      (tagged-value-ref x)))
 
   (define (usage code)
     (print "usage: chicken-transit [-h] [-d] [-e] [-v] [FILENAME ...]")
