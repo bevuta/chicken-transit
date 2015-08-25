@@ -33,7 +33,7 @@ by {{write-transit}} before emitting the JSON text. The keyword
 argument {{toplevel}} specifies whether the data is assumed to be a
 toplevel expression and defaults to true. If {{verbose}} is given and
 true, output will be in "verbose" JSON format. {{write-handlers}}
-defaults to the current value of {{current-transit-read-handlers}}.
+defaults to the current value of {{current-transit-write-handlers}}.
 
 <procedure>(transit-decode DATA [READ-HANDLERS])</procedure>
 
