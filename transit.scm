@@ -16,7 +16,7 @@
   (receive (result remainder)
     (read-json port)
     (values (and result (transit-decode result))
-            remainder)))
+	    remainder)))
 
 (define (write-transit data #!optional verbose (port (current-output-port)))
   (write-json (transit-encode data verbose: verbose) port))
